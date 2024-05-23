@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup page</title>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="card mt-3">
+                        <div class="my-card p-5">
+                            <!-- Sign up form -->
+                            
+                            <div th:if="${session.message1}" th:classappend="${'alert-'+session.message1.type}" class="alert alert-primary text-center" role="alert">
+                                <p th:text="${session.message1.content}"></p>
+                            </div>
+
+                            <div class="text-center">
+                                <img src="" alt="image" th:src="@{/image/register.png}" height="150px" width="150px">
+                            </div>
+
+                            <h1 class="text-center mb-5 mt-2">Register here !!</h1>
+
+                            <form 
+                            novalidate
+                            th:action="@{/do-register}" 
+                            method="post"
+                            th:object="${user}">
+
+
+                                <!-- name field -->
+
+                                <div class="form-group">
+
+                                    <label for="name_field">User name</label><br>
+  
+                                    <input 
+                                    name="name"
+                                    type="text" 
+                                    class="form-control text-left p-2 m-1" 
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
+                                    id="name_field" 
+                                    placeholder="Enter name"
+                                    th:value="${user.name}"
+                                    required>
+  
+                                    <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}" >
+  
+                                    </div>
+  
+                                  </div>
+
+                                <!-- email field -->
+
+                                <div class="form-group">
+
+                                  <label for="email_field">User email</label>
+
+                                  <input 
+                                  name="email"
+                                  type="email" 
+                                  class="form-control" 
+                                  th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
+                                  id="email_field" 
+                                  placeholder="Enter email"
+                                  th:value="${user.email}"
+                                  required>
+
+                                  <div class="invalid-feedback" th:each="e : ${#fields.errors('email')}" th:text="${e}" >
+
+                                  </div>
+
+                                </div>
+                            
+                                <!-- password field -->
+
+                                <div class="form-group">
+
+                                  <label for="password_field">User password</label><br>
+
+                                  <input 
+                                  name="password"
+                                  type="password" 
+                                  class="form-control text-left p-2" 
+                                  id="password_field" 
+                                  placeholder="Enter password"
+                                  th:value="${user.password}"
+                                  th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                                  required>
+
+                                  <div class="invalid-feedback" th:each="e : ${#fields.errors('password')}" th:text="${e}">
+
+                                  </div>
+                                </div>
+                            
+                                <!-- about field -->
+
+                                <div class="form-group">
+                                    <textarea name="about" id="" placeholder="Enter something about yourself !!" class="form-control" rows="6" th:value="${user.about}"></textarea>
+                                </div>
+
+
+                                <div class="form-check m-3 text-center">
+                                    <input name="agreement" type="checkbox" class="form-check-input" id="agreement">
+                                    <label for="agreement" class="form-check-label">Please agree terms and condition !!</label>
+                                </div>  
+
+
+                                <div class="container">
+                                    <button type="submit" class="btn btn-primary btn-block font-weight-bold">Submit</button>
+                                    <button type="reset" class="btn btn-warning btn-block font-weight-bold">Reset</button>
+                                </div>
+                            
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Place the first <script> tag in your HTML's <head> -->
+<!-- <script src="https://cdn.tiny.cloud/1/u9c2zsc7l79olikmhyfchyc6zclxutdmdqij5rc2lw4n83ey/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script> -->
+
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<!-- <script>
+  tinymce.init({
+    selector: 'textarea',
+    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+  });
+</script> -->
+
+    </section>
+</body>
+</html>
