@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+</head>
+
+<body>
+    <section>
+        <div id="login">
+
+
+            <div class="wrapper fadeInDown">
+                <div id="formContent">
+                    <!-- Tabs Titles -->
+
+                    <!-- Icon -->
+                    <div class="fadeIn first m-5">
+                        <img style="height: 150px; width: 150px;" th:src="@{/image/login.png}" id="icon"
+                            alt="User Icon" />
+                    </div>
+                    
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid username or password !!
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-primary">
+                        You have been logged out successfully !!
+                    </div>
+
+                    <!-- Login Form -->
+                    <form th:action="@{/dologin}" method="post" id="login-form">
+
+                        <input type="text" id="username" class="fadeIn second mb-3" name="username" placeholder="login">
+                        <input type="password" id="password" class="fadeIn third mb-3" name="password" placeholder="password">
+                        <input type="submit" class="fadeIn fourth" value="Log In">
+                    </form>
+
+                    <!-- Remind Passowrd -->
+                    <div id="formFooter">
+                        <a class="underlineHover" href="/signup">New User? Sign up here.</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>
